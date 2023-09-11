@@ -43,6 +43,14 @@ function game() {
     round++;
     console.log("Your score: " + userScore + " CPU Score: " + cpuScore)
   }
+
+  if (round === maxRounds && userScore > cpuScore) {
+    console.log("YOU WON!");
+  } else if (round === maxRounds && userScore < cpuScore) {
+    console.log("YOU LOST!");
+  } else if (round === maxRounds && userScore === cpuScore) {
+    console.log("IT WAS A DRAW");
+  }
 }
 
 game();
