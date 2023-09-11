@@ -2,10 +2,6 @@ const battleChoices = ["rock", "paper", "scissors"];
 let userScore = 0;
 let cpuScore = 0;
 
-// get a CPU's choice between the three options
-
-const computerSelection = Math.floor(Math.random() * battleChoices.length);
-
 // compare user choice to CPU choice
 
 function playRound(playerSelection, computerSelection) {
@@ -42,6 +38,7 @@ function game() {
   while (round < maxRounds) {
     let userInput = prompt("Rock, Paper, Scissors says...!");
     const playerSelection = userInput.toLowerCase(); // get user input for their choice between the three options (make sure it is case insensitive)
+    const computerSelection = Math.floor(Math.random() * battleChoices.length); // get a CPU's choice between the three options
     playRound(playerSelection, computerSelection);
     round++;
     console.log("Your score: " + userScore + " CPU Score: " + cpuScore)
