@@ -6,14 +6,10 @@ let cpuScore = 0;
 
 const computerSelection = Math.floor(Math.random() * battleChoices.length);
 
-// get user input for their choice between the three options (make sure it is case insensitive)
-
-let userInput = prompt("Rock, Paper, Scissors says...!");
-const playerSelection = userInput.toLowerCase();
-
 // compare user choice to CPU choice
 
 function playRound(playerSelection, computerSelection) {
+
   if (playerSelection === "rock" && computerSelection === 2) {
     console.log("You win! Rock beats scissors!");
     userScore++;
@@ -44,14 +40,15 @@ let round = 0;
 
 function game() {
   while (round < maxRounds) {
-    playRound();
+    let userInput = prompt("Rock, Paper, Scissors says...!");
+    const playerSelection = userInput.toLowerCase(); // get user input for their choice between the three options (make sure it is case insensitive)
+    playRound(playerSelection, computerSelection);
     round++;
-    console.log("Your score: " + userScore + "CPU Score: " + cpuScore)
+    console.log("Your score: " + userScore + " CPU Score: " + cpuScore)
   }
 }
 
-console.log(game())
-
+game();
 
 // if user's choice beats CPU's choice, output winner; else output loser
 // write code to handle draw
