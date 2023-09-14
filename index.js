@@ -2,31 +2,37 @@ const battleChoices = ["rock", "paper", "scissors"];
 let userScore = 0;
 let cpuScore = 0;
 
+// add DOM methods for results
+
+const results = document.querySelector("#results");
+const resultsContent = document.createElement("p");
+
 // compare user choice to CPU choice
 
 function playRound(playerSelection, computerSelection) {
 
   if (playerSelection === "rock" && computerSelection === 2) {
-    console.log("You win! Rock beats scissors!");
+    resultsContent.textContent = ("You win! Rock beats scissors!");
     userScore++;
   } else if (playerSelection === "paper" && computerSelection === 0) {
-    console.log("You win! Paper beats rock!");
+    resultsContent.textContent = ("You win! Paper beats rock!");
     userScore++;
   } else if (playerSelection === "scissors" && computerSelection === 1) {
-    console.log("You win! Scissors beats papaer!");
+    resultsContent.textContent = ("You win! Scissors beats papaer!");
     userScore++;
   } else if (computerSelection === 0 && playerSelection === "scissors") {
-    console.log("You lose! Rock beats scissors!");
+    resultsContent.textContent = ("You lose! Rock beats scissors!");
     cpuScore++
   } else if (computerSelection === 1 && playerSelection === "rock") {
-    console.log("You lose! Paper beats rock!");
+    resultsContent.textContent = ("You lose! Paper beats rock!");
     cpuScore++
   } else if (computerSelection === 2 && playerSelection === "paper") {
-    console.log("You lose! Scissors beats paper!");
+    resultsContent.textContent = ("You lose! Scissors beats paper!");
     cpuScore++
   } else {
-    console.log("It was a draw!");
+    resultsContent.textContent = ("It was a draw!");
   }
+  results.appendChild(resultsContent);
 }
 
 // add event listeners to buttons
