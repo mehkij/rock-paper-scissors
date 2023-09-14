@@ -29,29 +29,39 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
+// add event listeners to buttons
+
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach((button) => {
+  button.addEventListener("click", () =>{
+    playRound();
+  });
+});
+
 // make game go up to 5 rounds
 
-const maxRounds = 5;
-let round = 0;
+// const maxRounds = 5;
+// let round = 0;
 
-function game() {
-  while (round < maxRounds) {
-    let userInput = prompt("Rock, Paper, Scissors says...!");
-    const playerSelection = userInput.toLowerCase(); // get user input for their choice between the three options (make sure it is case insensitive)
-    const computerSelection = Math.floor(Math.random() * battleChoices.length); // get a CPU's choice between the three options
-    playRound(playerSelection, computerSelection);
-    round++;
-    console.log("Your score: " + userScore + " CPU Score: " + cpuScore)
-  }
+// function game() {
+//   while (round < maxRounds) {
+//     let userInput = prompt("Rock, Paper, Scissors says...!");
+//     const playerSelection = userInput.toLowerCase(); // get user input for their choice between the three options (make sure it is case insensitive)
+//     const computerSelection = Math.floor(Math.random() * battleChoices.length); // get a CPU's choice between the three options
+//     playRound(playerSelection, computerSelection);
+//     round++;
+//     console.log("Your score: " + userScore + " CPU Score: " + cpuScore)
+//   }
 
-  if (round === maxRounds && userScore > cpuScore) {
-    console.log("YOU WON!");
-  } else if (round === maxRounds && userScore < cpuScore) {
-    console.log("YOU LOST!");
-  } else if (round === maxRounds && userScore === cpuScore) {
-    console.log("IT WAS A DRAW");
-  }
-}
+//   if (round === maxRounds && userScore > cpuScore) {
+//     console.log("YOU WON!");
+//   } else if (round === maxRounds && userScore < cpuScore) {
+//     console.log("YOU LOST!");
+//   } else if (round === maxRounds && userScore === cpuScore) {
+//     console.log("IT WAS A DRAW");
+//   }
+// }
 
-game();
+// game();
 
