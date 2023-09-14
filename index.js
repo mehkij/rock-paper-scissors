@@ -10,64 +10,79 @@ const resultsContent = document.createElement("p");
 // compare user choice to CPU choice
 
 function playRound(playerSelection, computerSelection) {
+  // reset the content of resultsContent at the beginning of each round.
+  resultsContent.textContent = "";
 
-  if (playerSelection === "rock" && computerSelection === 2) {
-    resultsContent.textContent = ("You win! Rock beats scissors!");
+  // convert computerSelection to a string representation of the choice.
+  const computerChoice = battleChoices[computerSelection];
+
+  // compare playerSelection with computerChoice.
+  if (playerSelection === "rock" && computerChoice === "scissors") {
+    resultsContent.textContent = "You win! Rock beats scissors!";
     userScore++;
-  } else if (playerSelection === "paper" && computerSelection === 0) {
-    resultsContent.textContent = ("You win! Paper beats rock!");
+  } else if (playerSelection === "paper" && computerChoice === "rock") {
+    resultsContent.textContent = "You win! Paper beats rock!";
     userScore++;
-  } else if (playerSelection === "scissors" && computerSelection === 1) {
-    resultsContent.textContent = ("You win! Scissors beats papaer!");
+  } else if (playerSelection === "scissors" && computerChoice === "paper") {
+    resultsContent.textContent = "You win! Scissors beats paper!";
     userScore++;
-  } else if (computerSelection === 0 && playerSelection === "scissors") {
-    resultsContent.textContent = ("You lose! Rock beats scissors!");
-    cpuScore++
-  } else if (computerSelection === 1 && playerSelection === "rock") {
-    resultsContent.textContent = ("You lose! Paper beats rock!");
-    cpuScore++
-  } else if (computerSelection === 2 && playerSelection === "paper") {
-    resultsContent.textContent = ("You lose! Scissors beats paper!");
-    cpuScore++
+  } else if (computerChoice === "rock" && playerSelection === "scissors") {
+    resultsContent.textContent = "You lose! Rock beats scissors!";
+    cpuScore++;
+  } else if (computerChoice === "paper" && playerSelection === "rock") {
+    resultsContent.textContent = "You lose! Paper beats rock!";
+    cpuScore++;
+  } else if (computerChoice === "scissors" && playerSelection === "paper") {
+    resultsContent.textContent = "You lose! Scissors beats paper!";
+    cpuScore++;
   } else {
-    resultsContent.textContent = ("It was a draw!");
+    resultsContent.textContent = "It was a draw!";
   }
   results.appendChild(resultsContent);
 }
+
 
 // add event listeners to buttons
 
 const buttons = document.querySelectorAll("button");
 
+// **
 buttons.forEach((button) => {
-  button.addEventListener("click", () =>{
-    playRound();
+  button.addEventListener("click", () => {
+    if (round < maxRounds) {
+      game(button);
+    }
+
+    if (round === maxRounds) {
+      console.log("Game over!");
+    }
   });
 });
 
 // make game go up to 5 rounds
 
-// const maxRounds = 5;
-// let round = 0;
+const maxRounds = 5;
+let round = 0;
 
-// function game() {
-//   while (round < maxRounds) {
-//     let userInput = prompt("Rock, Paper, Scissors says...!");
-//     const playerSelection = userInput.toLowerCase(); // get user input for their choice between the three options (make sure it is case insensitive)
-//     const computerSelection = Math.floor(Math.random() * battleChoices.length); // get a CPU's choice between the three options
-//     playRound(playerSelection, computerSelection);
-//     round++;
-//     console.log("Your score: " + userScore + " CPU Score: " + cpuScore)
-//   }
+// Changed game() from while loop --> if statements. This allows ** to allow click = 1 round played
 
-//   if (round === maxRounds && userScore > cpuScore) {
-//     console.log("YOU WON!");
-//   } else if (round === maxRounds && userScore < cpuScore) {
-//     console.log("YOU LOST!");
-//   } else if (round === maxRounds && userScore === cpuScore) {
-//     console.log("IT WAS A DRAW");
-//   }
-// }
+function game(clickedButton) {
+  if (round < maxRounds) {
+    const playerSelection = clickedButton.id; // get user choice based on button press
+    const computerSelection = Math.floor(Math.random() * battleChoices.length); // get random CPU choice based on rounded number from 0-1 * length of choices
+    playRound(playerSelection, computerSelection);
+    round++;
+    console.log("Your score: " + userScore + " CPU Score: " + cpuScore);
+    console.log(playerSelection);
+  }
 
-// game();
-
+  if (round === maxRounds) {
+    if (userScore > cpuScore) {
+      console.log("YOU WON!");
+    } else if (userScore < cpuScore) {
+      console.log("YOU LOST!");
+    } else {
+      console.log("IT WAS A DRAW");
+    }
+  }
+}
