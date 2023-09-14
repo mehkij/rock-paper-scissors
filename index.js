@@ -2,10 +2,20 @@ const battleChoices = ["rock", "paper", "scissors"];
 let userScore = 0;
 let cpuScore = 0;
 
-// add DOM methods for results
+// add DOM methods for match results
 
 const results = document.querySelector("#results");
 const resultsContent = document.createElement("p");
+
+// add DOM methods for score
+
+const score = document.querySelector("#score");
+const scoreContent = document.createElement("p");
+
+// add DOM methods for overall game verdict
+
+const verdict = document.querySelector("#verdict");
+const verdictContent = document.createElement("p");
 
 // compare user choice to CPU choice
 
@@ -72,17 +82,22 @@ function game(clickedButton) {
     const computerSelection = Math.floor(Math.random() * battleChoices.length); // get random CPU choice based on rounded number from 0-1 * length of choices
     playRound(playerSelection, computerSelection);
     round++;
-    console.log("Your score: " + userScore + " CPU Score: " + cpuScore);
+    scoreContent.textContent = ("Your score: " + userScore + " CPU Score: " + cpuScore);
+    score.appendChild(scoreContent)
     console.log(playerSelection);
   }
 
   if (round === maxRounds) {
     if (userScore > cpuScore) {
-      console.log("YOU WON!");
+      verdictContent.textContent = "YOU WON!";
+      verdictContent.style.color = "green";
     } else if (userScore < cpuScore) {
-      console.log("YOU LOST!");
+      verdictContent.textContent = "YOU LOST!";
+      verdictContent.style.color = "red";
     } else {
-      console.log("IT WAS A DRAW");
+      verdictContent.textContent = "IT WAS A DRAW";
     }
   }
 }
+
+verdict.appendChild(verdictContent);
